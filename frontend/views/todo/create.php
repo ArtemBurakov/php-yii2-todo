@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model frontend\models\Todo */
 
 $this->title = Yii::t('frontend', 'Create Todo');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Todos'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Todos'), 'url' => ['active']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="todo-create">

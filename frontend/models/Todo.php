@@ -17,6 +17,10 @@ use yii\behaviors\TimestampBehavior;
  */
 class Todo extends \yii\db\ActiveRecord
 {
+    const STATUS_DELETED = 0;
+    const STATUS_ACTIVE = 10;
+    const STATUS_DONE = 20;
+
     /**
      * {@inheritdoc}
      */

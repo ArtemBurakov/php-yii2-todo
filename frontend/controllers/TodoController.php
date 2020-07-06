@@ -29,19 +29,41 @@ class TodoController extends Controller
         ];
     }
 
-    /**
-     * Lists all Todo models.
-     * @return mixed
-     */
-    public function actionIndex()
+    public function renderIndex($dataProvider)
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Todo::find(),
-        ]);
-
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    // Get active tasks.
+    public function actionActive()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Todo::find()->where(['status' => 10]),
+        ]);
+
+        return $this->renderIndex($dataProvider);
+    }
+
+    // Get completed tasks.
+    public function actionCompleted()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Todo::find()->where(['status' => 20]),
+        ]);
+
+        return $this->renderIndex($dataProvider);
+    }
+
+    // Get archive tasks.
+    public function actionArchive()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Todo::find()->where(['status' => 0]),
+        ]);
+
+        return $this->renderIndex($dataProvider);
     }
 
     /**
@@ -65,6 +87,7 @@ class TodoController extends Controller
     public function actionCreate()
     {
         $model = new Todo();
+        $model->status = Todo::STATUS_ACTIVE;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -96,6 +119,23 @@ class TodoController extends Controller
     }
 
     /**
+     * Changes task status to done.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDone($id)
+    {
+        $model = $this->findModel($id);
+        $model->status = Todo::STATUS_DONE;
+
+        if ($model->save()) {
+            return $this->redirect(['active']);
+        }
+    }
+
+    /**
      * Deletes an existing Todo model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -104,9 +144,12 @@ class TodoController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->status = Todo::STATUS_DELETED;
 
-        return $this->redirect(['index']);
+        if ($model->save()) {
+            return $this->redirect(['active']);
+        }
     }
 
     /**
