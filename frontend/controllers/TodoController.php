@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * TodoController implements the CRUD actions for Todo model.
@@ -20,6 +21,16 @@ class TodoController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['active', 'completed', 'archive'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -40,7 +51,10 @@ class TodoController extends Controller
     public function actionActive()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Todo::find()->where(['status' => 10]),
+            'query' => Todo::find()->where([
+                'status' => 10,
+                'user_id' => Yii::$app->user->identity->id,
+                ]),
         ]);
 
         return $this->renderIndex($dataProvider);
@@ -50,7 +64,10 @@ class TodoController extends Controller
     public function actionCompleted()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Todo::find()->where(['status' => 20]),
+            'query' => Todo::find()->where([
+                'status' => 20,
+                'user_id' => Yii::$app->user->identity->id,
+                ]),
         ]);
 
         return $this->renderIndex($dataProvider);
@@ -60,7 +77,10 @@ class TodoController extends Controller
     public function actionArchive()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Todo::find()->where(['status' => 0]),
+            'query' => Todo::find()->where([
+                'status' => 0,
+                'user_id' => Yii::$app->user->identity->id,
+                ]),
         ]);
 
         return $this->renderIndex($dataProvider);
@@ -88,6 +108,7 @@ class TodoController extends Controller
     {
         $model = new Todo();
         $model->status = Todo::STATUS_ACTIVE;
+        $model->user_id = Yii::$app->user->identity->id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

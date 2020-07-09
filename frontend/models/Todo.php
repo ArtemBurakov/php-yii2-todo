@@ -9,6 +9,7 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "todo".
  *
  * @property int $id
+ * @property int $user_id
  * @property string $name
  * @property string $text
  * @property int $status
@@ -55,6 +56,7 @@ class Todo extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('frontend', 'ID'),
+            'user_id' => Yii::t('frontend', 'User ID'),
             'name' => Yii::t('frontend', 'Name'),
             'text' => Yii::t('frontend', 'Text'),
             'status' => Yii::t('frontend', 'Status'),
