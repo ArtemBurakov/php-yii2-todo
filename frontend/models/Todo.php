@@ -43,8 +43,8 @@ class Todo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'text'], 'required'],
-            [['status', 'created_at', 'updated_at'], 'integer'],
+            [['name', 'text', 'user_id'], 'required'],
+            [['user_id', 'status', 'created_at', 'updated_at'], 'integer'],
             [['name', 'text'], 'string', 'max' => 255],
         ];
     }
@@ -63,5 +63,15 @@ class Todo extends \yii\db\ActiveRecord
             'created_at' => Yii::t('frontend', 'Created At'),
             'updated_at' => Yii::t('frontend', 'Updated At'),
         ];
+    }
+
+    public function beforeValidate()
+    {
+        //set user id for insert
+        if (!$this->id){
+            $this->user_id = \Yii::$app->user->identity->id;
+        }
+
+        return parent::beforeValidate();
     }
 }

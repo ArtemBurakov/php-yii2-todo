@@ -108,7 +108,6 @@ class TodoController extends Controller
     {
         $model = new Todo();
         $model->status = Todo::STATUS_ACTIVE;
-        $model->user_id = Yii::$app->user->identity->id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -182,7 +181,7 @@ class TodoController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Todo::findOne($id)) !== null) {
+        if (($model = Todo::find()->where(['id' => $id, 'user_id' => \Yii::$app->user->identity->id])->one()) !== null) {
             return $model;
         }
 
