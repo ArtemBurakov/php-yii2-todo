@@ -56,6 +56,14 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => ['v1/todo'],
                     'except' => ['delete'],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => ['v1/user'],
+                    'except' => ['delete', 'update', 'create', 'index'],
+                    'extraPatterns' => [
+                        'POST authorize' => 'authorize',
+                    ]
                 ]
             ]
         ]
