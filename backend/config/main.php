@@ -64,6 +64,11 @@ return [
                     'extraPatterns' => [
                         'POST authorize' => 'authorize',
                     ]
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => ['v1/user-fcm-token'],
+                    'except' => ['update','delete'],
                 ]
             ]
         ]

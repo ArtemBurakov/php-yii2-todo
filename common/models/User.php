@@ -6,6 +6,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use frontend\models\UserFcmToken;
 
 /**
  * User model
@@ -148,6 +149,14 @@ class User extends ActiveRecord implements IdentityInterface
     public function getAuthKey()
     {
         return $this->auth_key;
+    }
+
+    /**
+    * @return \yii\db\ActiveQuery
+    */
+    public function getUserFcmTokens()
+    {
+        return $this->hasMany(UserFcmToken::className(), ['user_id' => 'id']);
     }
 
     /**
