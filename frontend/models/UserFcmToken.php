@@ -63,12 +63,4 @@ class UserFcmToken extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('frontend', 'Updated At'),
         ];
     }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUser()
-    {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
-    }
 }

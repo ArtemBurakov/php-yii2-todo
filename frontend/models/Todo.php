@@ -4,6 +4,8 @@ namespace frontend\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use frontend\components\Helper;
+use common\models\User;
 
 /**
  * This is the model class for table "todo".
@@ -73,5 +75,31 @@ class Todo extends \yii\db\ActiveRecord
         }
 
         return parent::beforeValidate();
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        // send FCM push notification
+        $data = array(
+            "model" => "todo"
+        );
+
+        $tokenModels = $this->user->userFcmTokens;
+
+        if ($tokenModels && is_array($tokenModels)) {
+            foreach($tokenModels as $tokenModel){
+                $tokens[] = $tokenModel->registration_token;
+            }
+
+            Helper::pushNotification($tokens, $data);
+        }
     }
 }
