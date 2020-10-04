@@ -5,6 +5,7 @@ use yii\rest\ActiveController;
 use yii\filters\AccessControl;
 use Yii;
 use common\models\User;
+use frontend\models\SignupForm;
 
 class UserController extends ActiveController
 {
@@ -48,5 +49,38 @@ class UserController extends ActiveController
         ];
 
         return $result;
+    }
+
+    public function actionSignUp()
+    {
+        $params = Yii::$app->getRequest()->getBodyParams();
+        $response = Yii::$app->getResponse();
+
+        //validate data
+        $model = new SignupForm();
+        $model->load($params, '');
+
+        if (!$model->validate()) {
+            $response->setStatusCode(422, 'Data Validation Failed.');
+            $result = [];
+
+            foreach ($model->getFirstErrors() as $name => $message) {
+                $result[] = [
+                    'field' => $name,
+                    'message' => $message,
+                ];
+            }
+            return $result;
+        }
+
+        //signup user
+        if ($model->signup()) {
+            $user = User::findByUsername($model->username);
+
+            $result = [
+                'id' => $user->id,
+            ];
+            return $result;
+        }
     }
 }

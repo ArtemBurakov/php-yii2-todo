@@ -63,6 +63,7 @@ return [
                     'except' => ['delete', 'update', 'create', 'index'],
                     'extraPatterns' => [
                         'POST authorize' => 'authorize',
+                        'POST sign-up' => 'sign-up',
                     ]
                 ],
                 [
