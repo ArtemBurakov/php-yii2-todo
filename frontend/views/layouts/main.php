@@ -51,6 +51,7 @@ AppAsset::register($this);
                 ['label' => 'Archive', 'url' => ['/todo/archive']],
             ]
         ];
+        $menuItems[] = ['label' => 'Boards', 'url' => ['/board/index']];
         $menuItems[] = ['label' => 'Contact', 'url' => ['/site/contact']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
