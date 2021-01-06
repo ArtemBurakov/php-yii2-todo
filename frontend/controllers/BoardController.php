@@ -40,19 +40,37 @@ class BoardController extends Controller
         ];
     }
 
-    /**
-     * Lists all Board models.
-     * @return mixed
-     */
-    public function actionIndex()
+    public function renderIndex($dataProvider)
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Board::find(),
-        ]);
-
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    // Get active boards.
+    public function actionActive()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Board::find()->where([
+                'status' => 10,
+                'user_id' => Yii::$app->user->identity->id,
+                ]),
+        ]);
+
+        return $this->renderIndex($dataProvider);
+    }
+
+    // Get archive boards.
+    public function actionArchive()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Board::find()->where([
+                'status' => 0,
+                'user_id' => Yii::$app->user->identity->id,
+                ]),
+        ]);
+
+        return $this->renderIndex($dataProvider);
     }
 
     /**
@@ -115,9 +133,12 @@ class BoardController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->status = Board::STATUS_DELETED;
 
-        return $this->redirect(['index']);
+        if ($model->save()) {
+            return $this->redirect(['index']);
+        }
     }
 
     /**

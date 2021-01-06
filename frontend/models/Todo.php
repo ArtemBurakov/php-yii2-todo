@@ -47,7 +47,8 @@ class Todo extends \yii\db\ActiveRecord
         return [
             [['name', 'text'], 'required'],
             [['user_id', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['name', 'text'], 'string', 'max' => 255],
+            [['name'], 'string', 'max' => 55],
+            [['text'], 'string', 'max' => 255],
         ];
     }
 

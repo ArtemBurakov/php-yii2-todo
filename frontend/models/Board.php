@@ -13,11 +13,15 @@ use frontend\components\Helper;
  * @property int $id
  * @property int $user_id
  * @property string $name
+ * @property int $status
  * @property int $created_at
  * @property int $updated_at
  */
 class Board extends \yii\db\ActiveRecord
 {
+    const STATUS_DELETED = 0;
+    const STATUS_ACTIVE = 10;
+
     /**
      * {@inheritdoc}
      */
@@ -40,8 +44,8 @@ class Board extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['user_id', 'created_at', 'updated_at'], 'integer'],
-            [['name'], 'string', 'max' => 255],
+            [['user_id', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['name'], 'string', 'max' => 55],
         ];
     }
 
@@ -54,6 +58,7 @@ class Board extends \yii\db\ActiveRecord
             'id' => Yii::t('frontend', 'ID'),
             'user_id' => Yii::t('frontend', 'User ID'),
             'name' => Yii::t('frontend', 'Name'),
+            'status' => Yii::t('frontend', 'Status'),
             'created_at' => Yii::t('frontend', 'Created At'),
             'updated_at' => Yii::t('frontend', 'Updated At'),
         ];
