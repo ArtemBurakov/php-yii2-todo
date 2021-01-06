@@ -5,6 +5,7 @@ namespace frontend\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use common\models\User;
+use frontend\components\Helper;
 
 /**
  * This is the model class for table "board".
@@ -74,5 +75,23 @@ class Board extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        // send FCM push notification
+        $data = array(
+            "model" => "board"
+        );
+
+        $tokenModels = $this->user->userFcmTokens;
+
+        if ($tokenModels && is_array($tokenModels)) {
+            foreach($tokenModels as $tokenModel){
+                $tokens[] = $tokenModel->registration_token;
+            }
+
+            Helper::pushNotification($tokens, $data);
+        }
     }
 }
