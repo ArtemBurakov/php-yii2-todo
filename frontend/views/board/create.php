@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model frontend\models\Board */
 
 $this->title = Yii::t('frontend', 'Create Board');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Boards'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Boards'), 'url' => ['active']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="board-create">

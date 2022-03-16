@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model frontend\models\Board */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Boards'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Boards'), 'url' => ['active']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
