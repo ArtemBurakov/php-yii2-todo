@@ -126,7 +126,7 @@ class BoardController extends Controller
 
     /**
      * Deletes an existing Board model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * If deletion is successful, the browser will be redirected to the 'active' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -137,7 +137,7 @@ class BoardController extends Controller
         $model->status = Board::STATUS_DELETED;
 
         if ($model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['active']);
         }
     }
 
