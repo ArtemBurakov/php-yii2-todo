@@ -12,6 +12,7 @@ use common\models\User;
  *
  * @property int $id
  * @property int $user_id
+ * @property int $board_id
  * @property string $name
  * @property string $text
  * @property int $status
@@ -46,7 +47,7 @@ class Todo extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'text'], 'required'],
-            [['user_id', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['user_id', 'board_id', 'status', 'created_at', 'updated_at'], 'integer'],
             [['name'], 'string', 'max' => 55],
             [['text'], 'string', 'max' => 255],
         ];
@@ -60,6 +61,7 @@ class Todo extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('frontend', 'ID'),
             'user_id' => Yii::t('frontend', 'User ID'),
+            'board_id' => Yii::t('frontend', 'Board ID'),
             'name' => Yii::t('frontend', 'Name'),
             'text' => Yii::t('frontend', 'Text'),
             'status' => Yii::t('frontend', 'Status'),
