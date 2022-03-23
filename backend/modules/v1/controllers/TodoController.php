@@ -7,6 +7,13 @@ use yii\filters\AccessControl;
 
 class TodoController extends ActiveController
 {
+    public function actions()
+    {
+        $actions = parent::actions();
+        $actions['index']['class'] = 'backend\components\IndexActionPagination';
+        return $actions;
+    }
+
     public $modelClass = 'backend\models\TodoApi';
 
     public function behaviors()
