@@ -45,11 +45,18 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
         $menuItems[] = ['label' => 'Tasks',
-            'items' => [
-                ['label' => 'Active', 'url' => ['/todo/active']],
-                ['label' => 'Completed', 'url' => ['/todo/completed']],
-                ['label' => 'Archive', 'url' => ['/todo/archive']],
-            ]
+        'items' => [
+            ['label' => 'Active', 'url' => ['/task/active']],
+            ['label' => 'Completed', 'url' => ['/task/completed']],
+            ['label' => 'Archive', 'url' => ['/task/archive']],
+        ]
+        ];
+        $menuItems[] = ['label' => 'Notes',
+        'items' => [
+            ['label' => 'Active', 'url' => ['/todo/active']],
+            ['label' => 'Completed', 'url' => ['/todo/completed']],
+            ['label' => 'Archive', 'url' => ['/todo/archive']],
+        ]
         ];
         $menuItems[] = ['label' => 'Boards',
             'items' => [
