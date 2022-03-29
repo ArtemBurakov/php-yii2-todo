@@ -5,7 +5,7 @@ use yii\rest\ActiveController;
 use yii\filters\auth\HttpBearerAuth;
 use yii\filters\AccessControl;
 
-class TodoController extends ActiveController
+class TaskController extends ActiveController
 {
     public function actions()
     {
@@ -14,7 +14,7 @@ class TodoController extends ActiveController
         return $actions;
     }
 
-    public $modelClass = 'backend\models\TodoApi';
+    public $modelClass = 'backend\models\TaskApi';
 
     public function behaviors()
     {

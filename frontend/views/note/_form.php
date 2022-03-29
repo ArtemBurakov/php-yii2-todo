@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Todo */
+/* @var $model frontend\models\Note */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="todo-form">
+<div class="note-form">
 
     <?php $form = ActiveForm::begin(); ?>
 

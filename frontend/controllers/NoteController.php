@@ -3,7 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
-use frontend\models\Todo;
+use frontend\models\Note;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -11,9 +11,9 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
- * TodoController implements the CRUD actions for Todo model.
+ * NoteController implements the CRUD actions for Note model.
  */
-class TodoController extends Controller
+class NoteController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -47,11 +47,11 @@ class TodoController extends Controller
         ]);
     }
 
-    // Get active tasks.
+    // Get active notes.
     public function actionActive()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Todo::find()->where([
+            'query' => Note::find()->where([
                 'status' => 10,
                 'user_id' => Yii::$app->user->identity->id,
                 ]),
@@ -60,11 +60,11 @@ class TodoController extends Controller
         return $this->renderIndex($dataProvider);
     }
 
-    // Get completed tasks.
+    // Get completed notes.
     public function actionCompleted()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Todo::find()->where([
+            'query' => Note::find()->where([
                 'status' => 20,
                 'user_id' => Yii::$app->user->identity->id,
                 ]),
@@ -73,11 +73,11 @@ class TodoController extends Controller
         return $this->renderIndex($dataProvider);
     }
 
-    // Get archive tasks.
+    // Get archive notes.
     public function actionArchive()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Todo::find()->where([
+            'query' => Note::find()->where([
                 'status' => 0,
                 'user_id' => Yii::$app->user->identity->id,
                 ]),
@@ -87,7 +87,7 @@ class TodoController extends Controller
     }
 
     /**
-     * Displays a single Todo model.
+     * Displays a single Note model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -100,14 +100,14 @@ class TodoController extends Controller
     }
 
     /**
-     * Creates a new Todo model.
+     * Creates a new Note model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Todo();
-        $model->status = Todo::STATUS_ACTIVE;
+        $model = new Note();
+        $model->status = Note::STATUS_ACTIVE;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -119,7 +119,7 @@ class TodoController extends Controller
     }
 
     /**
-     * Updates an existing Todo model.
+     * Updates an existing Note model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -139,7 +139,7 @@ class TodoController extends Controller
     }
 
     /**
-     * Changes task status to done.
+     * Changes note status to done.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -148,7 +148,7 @@ class TodoController extends Controller
     public function actionDone($id)
     {
         $model = $this->findModel($id);
-        $model->status = Todo::STATUS_DONE;
+        $model->status = Note::STATUS_DONE;
 
         if ($model->save()) {
             return $this->redirect(['active']);
@@ -156,7 +156,7 @@ class TodoController extends Controller
     }
 
     /**
-     * Deletes an existing Todo model.
+     * Deletes an existing Note model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -165,7 +165,7 @@ class TodoController extends Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        $model->status = Todo::STATUS_DELETED;
+        $model->status = Note::STATUS_DELETED;
 
         if ($model->save()) {
             return $this->redirect(['active']);
@@ -173,15 +173,15 @@ class TodoController extends Controller
     }
 
     /**
-     * Finds the Todo model based on its primary key value.
+     * Finds the Note model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Todo the loaded model
+     * @return Note the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Todo::find()->where(['id' => $id, 'user_id' => \Yii::$app->user->identity->id])->one()) !== null) {
+        if (($model = Note::find()->where(['id' => $id, 'user_id' => \Yii::$app->user->identity->id])->one()) !== null) {
             return $model;
         }
 

@@ -54,12 +54,17 @@ return [
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => ['v1/todo'],
+                    'controller' => ['v1/task'],
                     'except' => ['delete'],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => ['v1/board'],
+                    'except' => ['delete'],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => ['v1/note'],
                     'except' => ['delete'],
                 ],
                 [

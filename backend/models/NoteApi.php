@@ -3,9 +3,9 @@
 namespace backend\models;
 
 use Yii;
-use frontend\models\Todo;
+use frontend\models\Note;
 
-class TodoApi extends Todo
+class NoteApi extends Note
 {
     public static function find()
     {

@@ -8,18 +8,18 @@ use frontend\components\Helper;
 use common\models\User;
 
 /**
- * This is the model class for table "todo".
+ * This is the model class for table "note".
  *
  * @property int $id
  * @property int $user_id
- * @property int $board_id
+ * @property int|null $board_id
  * @property string $name
  * @property string $text
  * @property int $status
  * @property int $created_at
  * @property int $updated_at
  */
-class Todo extends \yii\db\ActiveRecord
+class Note extends \yii\db\ActiveRecord
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
@@ -30,7 +30,7 @@ class Todo extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'todo';
+        return 'note';
     }
 
     public function behaviors()
@@ -59,14 +59,14 @@ class Todo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('frontend', 'ID'),
-            'user_id' => Yii::t('frontend', 'User ID'),
-            'board_id' => Yii::t('frontend', 'Board ID'),
-            'name' => Yii::t('frontend', 'Name'),
-            'text' => Yii::t('frontend', 'Text'),
-            'status' => Yii::t('frontend', 'Status'),
-            'created_at' => Yii::t('frontend', 'Created At'),
-            'updated_at' => Yii::t('frontend', 'Updated At'),
+            'id' => 'ID',
+            'user_id' => 'User ID',
+            'board_id' => 'Board ID',
+            'name' => 'Name',
+            'text' => 'Text',
+            'status' => 'Status',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
     }
 
@@ -92,7 +92,7 @@ class Todo extends \yii\db\ActiveRecord
     {
         // send FCM push notification
         $data = array(
-            "model" => "todo"
+            "model" => "note"
         );
 
         $tokenModels = $this->user->userFcmTokens;
