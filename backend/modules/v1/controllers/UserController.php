@@ -45,6 +45,7 @@ class UserController extends ActiveController
 
         $result = [
             'id' => $user->id,
+            'email' => $user->email,
             'access_token' => $user->access_token
         ];
 
