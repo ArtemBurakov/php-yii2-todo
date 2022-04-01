@@ -3,7 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
-use frontend\models\Board;
+use frontend\models\Workspace;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -11,9 +11,9 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
- * BoardController implements the CRUD actions for Board model.
+ * WorkspaceController implements the CRUD actions for Workspace model.
  */
-class BoardController extends Controller
+class WorkspaceController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -47,11 +47,11 @@ class BoardController extends Controller
         ]);
     }
 
-    // Get active boards.
+    // Get active workspaces.
     public function actionActive()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Board::find()->where([
+            'query' => Workspace::find()->where([
                 'status' => 10,
                 'user_id' => Yii::$app->user->identity->id,
                 ]),
@@ -60,11 +60,11 @@ class BoardController extends Controller
         return $this->renderIndex($dataProvider);
     }
 
-    // Get archive boards.
+    // Get archive workspaces.
     public function actionArchive()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Board::find()->where([
+            'query' => Workspace::find()->where([
                 'status' => 0,
                 'user_id' => Yii::$app->user->identity->id,
                 ]),
@@ -74,7 +74,7 @@ class BoardController extends Controller
     }
 
     /**
-     * Displays a single Board model.
+     * Displays a single Workspace model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -87,13 +87,13 @@ class BoardController extends Controller
     }
 
     /**
-     * Creates a new Board model.
+     * Creates a new Workspace model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Board();
+        $model = new Workspace();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -105,7 +105,7 @@ class BoardController extends Controller
     }
 
     /**
-     * Updates an existing Board model.
+     * Updates an existing Workspace model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -125,8 +125,8 @@ class BoardController extends Controller
     }
 
     /**
-     * Deletes an existing Board model.
-     * If deletion is successful, the browser will be redirected to the 'active' page.
+     * Deletes an existing Workspace model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -134,7 +134,7 @@ class BoardController extends Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        $model->status = Board::STATUS_DELETED;
+        $model->status = Workspace::STATUS_DELETED;
 
         if ($model->save()) {
             return $this->redirect(['active']);
@@ -142,15 +142,15 @@ class BoardController extends Controller
     }
 
     /**
-     * Finds the Board model based on its primary key value.
+     * Finds the Workspace model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Board the loaded model
+     * @return Workspace the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Board::find()->where(['id' => $id, 'user_id' => \Yii::$app->user->identity->id])->one()) !== null) {
+        if (($model = Workspace::find()->where(['id' => $id, 'user_id' => \Yii::$app->user->identity->id])->one()) !== null) {
             return $model;
         }
 

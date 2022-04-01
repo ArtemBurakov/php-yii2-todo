@@ -8,7 +8,7 @@ use common\models\User;
 use frontend\components\Helper;
 
 /**
- * This is the model class for table "board".
+ * This is the model class for table "workspace".
  *
  * @property int $id
  * @property int $user_id
@@ -17,7 +17,7 @@ use frontend\components\Helper;
  * @property int $created_at
  * @property int $updated_at
  */
-class Board extends \yii\db\ActiveRecord
+class Workspace extends \yii\db\ActiveRecord
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
@@ -27,7 +27,7 @@ class Board extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'board';
+        return 'workspace';
     }
 
     public function behaviors()
@@ -55,12 +55,12 @@ class Board extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('frontend', 'ID'),
-            'user_id' => Yii::t('frontend', 'User ID'),
-            'name' => Yii::t('frontend', 'Name'),
-            'status' => Yii::t('frontend', 'Status'),
-            'created_at' => Yii::t('frontend', 'Created At'),
-            'updated_at' => Yii::t('frontend', 'Updated At'),
+            'id' => 'ID',
+            'user_id' => 'User ID',
+            'name' => 'Name',
+            'status' => 'Status',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
     }
 
@@ -86,7 +86,7 @@ class Board extends \yii\db\ActiveRecord
     {
         // send FCM push notification
         $data = array(
-            "model" => "board"
+            "model" => "workspace"
         );
 
         $tokenModels = $this->user->userFcmTokens;

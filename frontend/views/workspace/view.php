@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Board */
+/* @var $model frontend\models\Workspace */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Boards'), 'url' => ['active']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Workspaces'), 'url' => ['active']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="board-view">
+<div class="workspace-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

@@ -59,7 +59,7 @@ return [
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => ['v1/board'],
+                    'controller' => ['v1/workspace'],
                     'except' => ['delete'],
                 ],
                 [

@@ -3,9 +3,9 @@
 namespace backend\models;
 
 use Yii;
-use frontend\models\Board;
+use frontend\models\Workspace;
 
-class BoardApi extends Board
+class WorkspaceApi extends Workspace
 {
     public static function find()
     {

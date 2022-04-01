@@ -37,7 +37,6 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
     ];
 
     if (Yii::$app->user->isGuest) {
@@ -51,10 +50,10 @@ AppAsset::register($this);
                 ['label' => 'Archive', 'url' => ['/task/archive']],
             ]
         ];
-        $menuItems[] = ['label' => 'Boards',
+        $menuItems[] = ['label' => 'Workspaces',
             'items' => [
-                ['label' => 'Active', 'url' => ['/board/active']],
-                ['label' => 'Archive', 'url' => ['/board/archive']],
+                ['label' => 'Active', 'url' => ['/workspace/active']],
+                ['label' => 'Archive', 'url' => ['/workspace/archive']],
             ]
         ];
         $menuItems[] = ['label' => 'Notes',
@@ -64,8 +63,6 @@ AppAsset::register($this);
                 ['label' => 'Archive', 'url' => ['/note/archive']],
             ]
         ];
-
-        $menuItems[] = ['label' => 'Contact', 'url' => ['/site/contact']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(

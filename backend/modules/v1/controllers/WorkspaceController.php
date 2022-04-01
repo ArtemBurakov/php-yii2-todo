@@ -5,7 +5,7 @@ use yii\rest\ActiveController;
 use yii\filters\auth\HttpBearerAuth;
 use yii\filters\AccessControl;
 
-class BoardController extends ActiveController
+class WorkspaceController extends ActiveController
 {
     public function actions()
     {
@@ -14,7 +14,7 @@ class BoardController extends ActiveController
         return $actions;
     }
 
-    public $modelClass = 'backend\models\BoardApi';
+    public $modelClass = 'backend\models\WorkspaceApi';
 
     public function behaviors()
     {
