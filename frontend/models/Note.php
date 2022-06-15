@@ -15,6 +15,7 @@ use common\models\User;
  * @property int|null $board_id
  * @property string $name
  * @property string $text
+ * @property int $type
  * @property int $status
  * @property int $created_at
  * @property int $updated_at
@@ -24,6 +25,9 @@ class Note extends \yii\db\ActiveRecord
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
     const STATUS_DONE = 20;
+
+    const STATUS_TASK = 0;
+    const STATUS_NOTE = 10;
 
     /**
      * {@inheritdoc}
@@ -46,8 +50,7 @@ class Note extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'text'], 'required'],
-            [['user_id', 'board_id', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['user_id', 'type', 'board_id', 'status', 'created_at', 'updated_at'], 'integer'],
             [['name'], 'string', 'max' => 55],
             [['text'], 'string', 'max' => 255],
         ];
@@ -64,6 +67,7 @@ class Note extends \yii\db\ActiveRecord
             'board_id' => 'Board ID',
             'name' => 'Name',
             'text' => 'Text',
+            'type' => 'Type',
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

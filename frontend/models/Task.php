@@ -12,6 +12,7 @@ use common\models\User;
  *
  * @property int $id
  * @property int $user_id
+ * @property int $note_id
  * @property string $name
  * @property int $status
  * @property int $created_at
@@ -44,8 +45,7 @@ class Task extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
-            [['user_id', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['user_id', 'note_id', 'status', 'created_at', 'updated_at'], 'integer'],
             [['name'], 'string', 'max' => 55],
         ];
     }
@@ -58,6 +58,7 @@ class Task extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
+            'note_id' => 'User ID',
             'name' => 'Name',
             'status' => 'Status',
             'created_at' => 'Created At',

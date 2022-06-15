@@ -72,7 +72,9 @@ return [
                     'controller' => ['v1/user'],
                     'except' => ['delete', 'update', 'create', 'index'],
                     'extraPatterns' => [
+                        'OPTIONS authorize' => 'options',
                         'POST authorize' => 'authorize',
+                        'OPTIONS sign-up' => 'options',
                         'POST sign-up' => 'sign-up',
                     ]
                 ],

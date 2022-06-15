@@ -6,10 +6,20 @@ use yii\filters\AccessControl;
 use Yii;
 use common\models\User;
 use frontend\models\SignupForm;
+use yii\filters\Cors;
 
 class UserController extends ActiveController
 {
     public $modelClass = 'common\models\User';
+
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['corsFilter'] = [
+            'class' => Cors::className()
+        ];
+        return $behaviors;
+    }
 
     public function actionAuthorize()
     {
