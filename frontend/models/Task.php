@@ -46,7 +46,7 @@ class Task extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'note_id', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['name'], 'string', 'max' => 55],
+            [['name'], 'string'],
         ];
     }
 

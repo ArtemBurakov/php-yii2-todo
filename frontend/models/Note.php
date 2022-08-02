@@ -51,8 +51,7 @@ class Note extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'type', 'board_id', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['name'], 'string', 'max' => 55],
-            [['text'], 'string', 'max' => 255],
+            [['name', 'text'], 'string'],
         ];
     }
 
