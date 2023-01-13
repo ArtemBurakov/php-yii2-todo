@@ -108,6 +108,7 @@ class NoteController extends Controller
     {
         $model = new Note();
         $model->status = Note::STATUS_ACTIVE;
+        $model->type = Note::TYPE_NOTE;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

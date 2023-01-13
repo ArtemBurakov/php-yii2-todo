@@ -26,8 +26,8 @@ class Note extends \yii\db\ActiveRecord
     const STATUS_ACTIVE = 10;
     const STATUS_DONE = 20;
 
-    const STATUS_TASK = 0;
-    const STATUS_NOTE = 10;
+    const TYPE_TASK = 1;
+    const TYPE_NOTE = 0;
 
     /**
      * {@inheritdoc}
